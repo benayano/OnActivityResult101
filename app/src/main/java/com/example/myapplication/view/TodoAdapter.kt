@@ -22,7 +22,6 @@ class TodoAdapter(private val clickListener: (itemViewData: ItemViewData) -> Uni
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(getItem(position), clickListener)
     }
-
 }
 
 
@@ -31,16 +30,15 @@ class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     private val itemName: TextView = view.findViewById(R.id.tvName)
     private val checkBox: CheckBox = view.findViewById(R.id.checkBox)
 
-    fun bind(itemViewData: ItemViewData, clickChkBox: (item: ItemViewData) -> Unit) {
+    fun bind(itemViewData: ItemViewData, clickChekBox: (item: ItemViewData) -> Unit) {
         itemId.text = itemViewData.id.toString()
         itemName.text = itemViewData.name
         checkBox.isChecked = itemViewData.complete
         checkBox.setOnCheckedChangeListener { compoundButton, b ->
             if (b != itemViewData.complete) {
-                clickChkBox.invoke(itemViewData.copy(complete = b))
+                clickChekBox.invoke(itemViewData.copy(complete = b))
             }
         }
-
     }
 }
 

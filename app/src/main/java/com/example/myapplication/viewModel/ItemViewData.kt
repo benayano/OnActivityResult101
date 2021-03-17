@@ -7,5 +7,5 @@ data class ItemViewData(
 )
 
 data class ItemListViewData(
-    val ItemsList:List<ItemViewData>
+    internal val itemsList:List<ItemViewData>
 )

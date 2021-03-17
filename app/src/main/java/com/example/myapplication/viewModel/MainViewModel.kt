@@ -2,8 +2,10 @@ package com.example.myapplication.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.map
+import androidx.lifecycle.viewModelScope
 import com.example.myapplication.model.DataBaceRepository
 import com.example.myapplication.model.db.TodoItem
+import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: DataBaceRepository) : ViewModel() {
     val listAllLiveData = repository
@@ -36,7 +38,7 @@ class MainViewModel(private val repository: DataBaceRepository) : ViewModel() {
         )
 
     fun onItemChenged(itemViewData: ItemViewData){
-        suspend {
+        viewModelScope.launch {
             repository.updatItem(
                 convertToItemModel(itemViewData)
             )
@@ -44,7 +46,7 @@ class MainViewModel(private val repository: DataBaceRepository) : ViewModel() {
     }
 
     fun deleteItem(itemViewData: ItemViewData){
-        suspend {
+        viewModelScope.launch {
             repository.deleteItem(
                 convertToItemModel(itemViewData)
             )
@@ -52,7 +54,7 @@ class MainViewModel(private val repository: DataBaceRepository) : ViewModel() {
     }
 
     fun creatItem(test:String){
-        suspend {
+        viewModelScope.launch{
             repository.insertItem(TodoItem(id =null,name =test,isCheck = true))
         }
     }

@@ -1,11 +1,9 @@
 package com.example.myapplication.model.db
 
 import androidx.lifecycle.LiveData
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 
+@Dao
 interface TodoDAO {
     @Insert(onConflict =OnConflictStrategy.ABORT)
     suspend fun insertItem(item: TodoItem)

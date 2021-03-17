@@ -6,8 +6,9 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.example.myapplication.model.DataBaceRepository
-import com.example.myapplication.model.db.RoomCreator
+import com.example.myapplication.model.db.AppDataBace
 import com.example.myapplication.view.TodoAdapter
 import com.example.myapplication.viewModel.ItemViewData
 import com.example.myapplication.viewModel.ItemViewModelFactory
@@ -16,12 +17,19 @@ import com.example.myapplication.viewModel.MainViewModel
 class MainActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<MainViewModel> {
-        val itemDao = RoomCreator
-            .getDb(this)
-            .todoDao()
-        ItemViewModelFactory(DataBaceRepository(itemDao))
+        ItemViewModelFactory(
+            DataBaceRepository(
+                Room.databaseBuilder(this, AppDataBace::class.java, "table-item")
+                    .build()
+                    .todoDao()
+            )
+        )
     }
+
     private val itemListAdapter by lazy { TodoAdapter(this::onItemsChanged) }
+    private val allItems: Button by lazy { findViewById(R.id.btnGetAll) }
+    private val checkItems: Button by lazy { findViewById(R.id.btnSelected) }
+    private val notItems: Button by lazy { findViewById(R.id.btnNot) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +39,22 @@ class MainActivity : AppCompatActivity() {
         itemListView.adapter = itemListAdapter
 
         viewModel.listAllLiveData.observe(this) { viewState ->
-            itemListAdapter.submitList(viewState.ItemsList)
+            itemListAdapter.submitList(viewState.itemsList)
         }
+        allItems.setOnClickListener {
+
+        }
+        checkItems.setOnClickListener {
+            viewModel.listCheckedLiveData.observe(this) { viewState ->
+                itemListAdapter.submitList(viewState.itemsList)
+            }
+        }
+        notItems.setOnClickListener {
+            viewModel.listNotChckedLiveData.observe(this) { viewState ->
+                itemListAdapter.submitList(viewState.itemsList)
+            }
+        }
+
         val addItemEditText: EditText = findViewById(R.id.etAddItem)
         val addItemBTN: Button = findViewById(R.id.btnAdd)
 
@@ -42,7 +64,6 @@ class MainActivity : AppCompatActivity() {
                 addItemEditText.text = null
             }
         }
-
 
     }
 
