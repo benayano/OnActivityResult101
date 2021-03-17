@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/etAddItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Please Enter name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btnAdd"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="4dp"
+        android:text="add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/btnGetAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get All"
+        app:layout_constraintBottom_toTopOf="@+id/btnAdd"
+        app:layout_constraintEnd_toEndOf="@+id/btnAdd"
+        app:layout_constraintStart_toStartOf="@+id/btnAdd" />
+
+    <Button
+        android:id="@+id/btnSelected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Selected"
+        app:layout_constraintBottom_toTopOf="@+id/btnGetAll"
+        app:layout_constraintEnd_toEndOf="@+id/btnAdd"
+        app:layout_constraintStart_toStartOf="@+id/btnAdd" />
+
+    <Button
+        android:id="@+id/btnNot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:text="Not complat"
+        app:layout_constraintBottom_toTopOf="@+id/btnSelected"
+        app:layout_constraintEnd_toEndOf="@+id/btnAdd"
+        app:layout_constraintStart_toStartOf="@+id/btnAdd" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
