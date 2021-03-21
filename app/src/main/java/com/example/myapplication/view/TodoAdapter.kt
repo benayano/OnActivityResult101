@@ -19,8 +19,15 @@ class TodoAdapter(private val clickListener: (itemViewData: ItemViewData) -> Uni
         return ItemViewHolder(view)
     }
 
+    var onItemCliced :(itemViewData: ItemViewData) -> Unit={}
+
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bind(getItem(position), clickListener)
+        val thisItem = getItem(position)
+        holder.bind(thisItem, clickListener)
+
+        holder.itemView.findViewById<TextView>(R.id.tvName).setOnClickListener {
+            onItemCliced.invoke(thisItem)
+        }
     }
 }
 

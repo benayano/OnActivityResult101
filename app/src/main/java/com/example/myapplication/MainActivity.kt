@@ -31,6 +31,8 @@ class MainActivity : AppCompatActivity() {
     private val checkItems: Button by lazy { findViewById(R.id.btnSelected) }
     private val notItems: Button by lazy { findViewById(R.id.btnNot) }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -38,21 +40,29 @@ class MainActivity : AppCompatActivity() {
         val itemListView: RecyclerView = findViewById(R.id.rvMain)
         itemListView.adapter = itemListAdapter
 
-        viewModel.listAllLiveData.observe(this) { viewState ->
+//        viewModel.listAllLiveData.observe(this) { viewState ->
+//            itemListAdapter.submitList(viewState.itemsList)
+//        }
+
+
+        viewModel.mainLiveData.observe(this) { viewState ->
             itemListAdapter.submitList(viewState.itemsList)
         }
-        allItems.setOnClickListener {
 
+        allItems.setOnClickListener {
+            viewModel.loadAll()
         }
         checkItems.setOnClickListener {
-            viewModel.listCheckedLiveData.observe(this) { viewState ->
-                itemListAdapter.submitList(viewState.itemsList)
-            }
+            viewModel.loadChecked()
+//            viewModel.listCheckedLiveData.observe(this) { viewState ->
+//                itemListAdapter.submitList(viewState.itemsList)
+//            }
         }
         notItems.setOnClickListener {
-            viewModel.listNotChckedLiveData.observe(this) { viewState ->
-                itemListAdapter.submitList(viewState.itemsList)
-            }
+            viewModel.loadNotChecked()
+//            viewModel.listNotCheckedLiveData.observe(this) { viewState ->
+//                itemListAdapter.submitList(viewState.itemsList)
+//            }
         }
 
         val addItemEditText: EditText = findViewById(R.id.etAddItem)
@@ -60,14 +70,21 @@ class MainActivity : AppCompatActivity() {
 
         addItemBTN.setOnClickListener {
             if (addItemEditText.text != null) {
-                viewModel.creatItem(addItemEditText.text.toString())
+                viewModel.createItem(addItemEditText.text.toString())
                 addItemEditText.text = null
             }
         }
 
+        itemListAdapter.onItemCliced={itemViewData->
+            viewModel.deleteItem(itemViewData = itemViewData)
+        }
+
+    }
+    private fun loadList(){
+
     }
 
     private fun onItemsChanged(itemViewData: ItemViewData) {
-        viewModel.onItemChenged(itemViewData)
+        viewModel.onItemChanged(itemViewData)
     }
 }
