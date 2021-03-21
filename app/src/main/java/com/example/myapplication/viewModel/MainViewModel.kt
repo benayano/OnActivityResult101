@@ -18,24 +18,6 @@ class MainViewModel(private val repository: DataBaceRepository) : ViewModel() {
         .getIsNotCheckd()
         .map { ItemListViewData(convertToListViewData(it)) }
 
-    val mainLiveData: MediatorLiveData<ItemListViewData> = MediatorLiveData()
-
-
-//    fun bindLists() {
-//        mainLiveData.addSource(listAllLiveData) { mainLiveData.value = it }
-//        mainLiveData.addSource(listNotCheckedLiveData) { mainLiveData.value = it }
-//        mainLiveData.addSource(listCheckedLiveData) { mainLiveData.value = it }
-//    }
-    fun loadAll()= loadLiveData(listAllLiveData)
-    fun loadChecked()= loadLiveData(listCheckedLiveData)
-    fun loadNotChecked() = loadLiveData(listNotCheckedLiveData)
-
-    private fun loadLiveData(liveData: LiveData<ItemListViewData>) {
-        mainLiveData.addSource(liveData) {
-            mainLiveData.value = it
-        }
-    }
-
 
     private fun convertToListViewData(listTodoItem: List<TodoItem>): List<ItemViewData> {
         return listTodoItem.mapNotNull { todoItem ->

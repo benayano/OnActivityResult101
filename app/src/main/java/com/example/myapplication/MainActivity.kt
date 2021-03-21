@@ -40,30 +40,9 @@ class MainActivity : AppCompatActivity() {
         val itemListView: RecyclerView = findViewById(R.id.rvMain)
         itemListView.adapter = itemListAdapter
 
-//        viewModel.listAllLiveData.observe(this) { viewState ->
-//            itemListAdapter.submitList(viewState.itemsList)
-//        }
-
-
-        viewModel.mainLiveData.observe(this) { viewState ->
+        viewModel.listAllLiveData.observe(this) { viewState ->
             itemListAdapter.submitList(viewState.itemsList)
-        }
-
-        allItems.setOnClickListener {
-            viewModel.loadAll()
-        }
-        checkItems.setOnClickListener {
-            viewModel.loadChecked()
-//            viewModel.listCheckedLiveData.observe(this) { viewState ->
-//                itemListAdapter.submitList(viewState.itemsList)
-//            }
-        }
-        notItems.setOnClickListener {
-            viewModel.loadNotChecked()
-//            viewModel.listNotCheckedLiveData.observe(this) { viewState ->
-//                itemListAdapter.submitList(viewState.itemsList)
-//            }
-        }
+       }
 
         val addItemEditText: EditText = findViewById(R.id.etAddItem)
         val addItemBTN: Button = findViewById(R.id.btnAdd)
@@ -78,9 +57,6 @@ class MainActivity : AppCompatActivity() {
         itemListAdapter.onItemCliced={itemViewData->
             viewModel.deleteItem(itemViewData = itemViewData)
         }
-
-    }
-    private fun loadList(){
 
     }
 
