@@ -21,6 +21,7 @@ import com.example.testingapplication.LoginActivity.Companion.RESULT
  * The mainActivity can either call loginActivity or open the image gallery and return a reply.
  * By the answer one chooses the image to be the central image
  *
+ *
  */
 
 class MainActivity : AppCompatActivity() {
