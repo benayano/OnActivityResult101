@@ -1,4 +1,4 @@
-package com.example.testingapplication
+package com.example.OnActivityResult
 
 import org.junit.Test
 

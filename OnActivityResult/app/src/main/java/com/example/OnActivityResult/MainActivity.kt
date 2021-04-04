@@ -1,4 +1,4 @@
-package com.example.testingapplication
+package com.example.OnActivityResult
 
 import android.content.Intent
 import android.content.Intent.ACTION_PICK
@@ -12,7 +12,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.example.testingapplication.LoginActivity.Companion.RESULT
+import com.example.OnActivityResult.LoginActivity.Companion.RESULT
 
 
 /**

@@ -1,4 +1,4 @@
-package com.example.testingapplication
+package com.example.OnActivityResult
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
